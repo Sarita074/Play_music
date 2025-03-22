@@ -174,30 +174,41 @@ async function main() {
     document.querySelector(".left").style.left = "-120%";
   });
 
-  // Add an event listener to previous
   previous.addEventListener("click", () => {
+    console.log(songs)
     currentSong.pause();
     console.log("Previous clicked");
-    let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
-    if (index - 1 >= 0) {
-      playMusic(songs[index - 1]);
-    } else {
-      playMusic(songs[songs.length - 1]);
-    }
-  });
 
-  // Add an event listener to next
-  next.addEventListener("click", () => {
+    let currentSongName = decodeURIComponent(currentSong.src.split("/").pop()); // Fix URL encoding issue
+    let index = songs.indexOf(currentSongName);
+
+    if (index > 0) {
+        playMusic(songs[index - 1], currFolder);
+    } else {
+        playMusic(songs[songs.length - 1], currFolder); // Loop back to last song
+    }
+});
+
+next.addEventListener("click", () => {
+  console.log(songs)
+    if (!songs || songs.length === 0) {
+        console.error("No songs available.");
+        return;
+    }
+
     currentSong.pause();
     console.log("Next clicked");
 
-    let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
-    if (index + 1 < songs.length) {
-      playMusic(songs[index + 1]);
+    let currentSongName = decodeURIComponent(currentSong.src.split("/").pop());
+    let index = songs.indexOf(currentSongName);
+
+    if (index < songs.length - 1) {
+        playMusic(songs[index + 1], currFolder);
     } else {
-      playMusic(songs[0]);
+        playMusic(songs[0], currFolder); // Loop back to first song
     }
-  });
+});
+
 
   // Add an event to volume
   document
