@@ -173,7 +173,7 @@ body{
 }
 
 .playbar{
-    display: none;
+    display: block;
     position: absolute;
     bottom: 20px;
     filter: invert(1);
