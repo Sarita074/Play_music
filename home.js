@@ -67,11 +67,10 @@ async function displayAlbums() {
     songs = songFiles;
     const songList = document.querySelector(".songlist ul");
     songList.innerHTML = ""; // Clear previous songs
-
+    document.getElementById("folder").innerHTML= `${category}`
     songFiles.forEach((songFile) => {
       const songName = songFile.replace(/\.[^/.]+$/, ""); // Remove file extension
       const songPath = `songs/${category}/${songFile}`; // Full path to song file
-
       const listItem = document.createElement("li");
       listItem.innerHTML = `
                     <div class="info">
@@ -82,8 +81,7 @@ async function displayAlbums() {
                         <img src="play.svg" alt="Play">
                     </div>
                 `;
-      listItem.addEventListener("click", () =>
-        playMusic(songs, songFile, category)
+      listItem.addEventListener("click", () =>playMusic(songs, songFile, category)
       ); // Pass category
       songList.appendChild(listItem);
     });
