@@ -59,6 +59,7 @@ async function displayAlbums() {
                 `;
       card.addEventListener("click", () =>
         displaySongs(category, data[category])
+      
       ); // Click event
       cardContainer.appendChild(card);
     });
@@ -68,6 +69,8 @@ async function displayAlbums() {
     const songList = document.querySelector(".songlist ul");
     songList.innerHTML = ""; // Clear previous songs
     document.getElementById("folder").innerHTML= `${category}`
+    // Open the hamburger menu automatically
+    document.querySelector(".left").style.left = "0"; 
     songFiles.forEach((songFile) => {
       const songName = songFile.replace(/\.[^/.]+$/, ""); // Remove file extension
       const songPath = `songs/${category}/${songFile}`; // Full path to song file
