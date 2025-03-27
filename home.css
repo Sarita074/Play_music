@@ -27,11 +27,11 @@ body{
     width: 25vw;
     padding: 10px;
     position: relative;
-    background: linear-gradient(270deg, #6db3f2, #9cecfb, #f6d365); /* Balanced colors */
+    background: linear-gradient(180deg, #1E1E1E, #2C2C2C); /* Balanced colors */
 }
 
 .right{
-    background: linear-gradient(150deg, #a06df2, #9cfbe8, #ecf665); /* Balanced colors */
+    background: linear-gradient(135deg, #f1db5f, #FF69B4, #87CEFA); /* Balanced colors */
     width:75vw;
     height: 96vh;
     
@@ -137,12 +137,15 @@ body{
     width: 200px ;
     padding: 10px;
     border-radius: 5px;
-    background-color: #d7a5f8;
+    background: rgba(255, 255, 255, 0.2); /* Subtle transparency */
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
     position: relative;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 .card:hover {
-    box-shadow: 0px 10px 20px rgba(51, 56, 211, 0.7);
+    transform: scale(0.9); /* Slight zoom effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card > *{
@@ -153,24 +156,6 @@ body{
     object-fit: contain;
 }
 
-.play {
-    width: 28px;
-    height: 28px;
-    background-color: #1FDF64;
-    border-radius: 50%;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 168px;
-    right: 17px;
-    opacity: var(--a);
-    transition: all 1s ease-out;
-}
-.play:hover{
-    transition: all 1s ease-out;
-}
 
 .playbar{
     display: block;
@@ -200,7 +185,13 @@ body{
     display: flex;
     justify-content: center;
     gap: 12px;
+    transition: all 0.3s ease;
 }
+.songbutton{
+    box-shadow: 0px 0px 10px rgba(143, 224, 120, 0.3);
+    transform: scale(1.02);
+}
+
 .songlist{
     height: 410px;
     overflow-y: scroll;
