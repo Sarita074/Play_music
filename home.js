@@ -19,11 +19,11 @@ function secondsToMinutesSeconds(seconds) {
 let Index = 0;
 const playMusic = (songFile, track, category, pause = false) => {
   currFolder = category;
-  console.log(currFolder);
-  console.log(track);
+  // console.log(currFolder);
+  // console.log(track);
   currentSong.src = `songs/${currFolder}/` + track; // Fixed path
   Index = songFile.indexOf(track); // Find the track in the songs array
-  console.log(Index);
+  // console.log(Index);
 
   if (!pause) {
     currentSong.play();
@@ -190,7 +190,7 @@ async function main() {
     if ((Index + 1) < songs.length) {
       Index ++; // Move to the next song
     } else {
-      Index = songs[0]; // Loop to the last song if at the start
+      Index = 0; // Loop to the last song if at the start
     }
 
     playMusic(songs, songs[Index], currFolder);
@@ -246,9 +246,11 @@ async function main() {
     
     if (Index + 1 < songs.length) {
       Index ++
+      console.log(Index)
     } else {
       // If it's the last song, restart from the first song
-      Index = songs[0];
+      Index = 0;
+      console.log(Index)
     }
     playMusic(songs, songs[Index], currFolder);
   });
