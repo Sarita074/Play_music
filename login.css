@@ -141,7 +141,9 @@ button {
   color: white;
   text-decoration: underline;
 }
-
+a {
+  color: #00fff7; /* or any bright shade */
+}
 .footer {
   text-align: center;
   padding: 20px;

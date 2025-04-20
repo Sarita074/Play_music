@@ -81,11 +81,21 @@ async function displayAlbums() {
                     </div>
                     <div class="playnow">
                         <span>Play Now</span>
-                        <img src="play.svg" alt="Play">
+                        <img src="play.svg" alt="Play" class="invert">
                     </div>
                 `;
-      listItem.addEventListener("click", () =>playMusic(songs, songFile, category)
-      ); // Pass category
+                listItem.addEventListener("click", (e) => {
+                  // Reset all other buttons to "play"
+                  document.querySelectorAll(".playnow img").forEach(img => img.src = "play.svg");
+                
+                  // Set current button to "pause"
+                  const playBtn = e.currentTarget.querySelector(".playnow img");
+                  playMusic(songs, songFile, category);
+                  playBtn.src = "pause.svg";
+                
+                  // Store reference to the current play button
+                  currentSong.playBtn = playBtn;
+                });// Pass category
       songList.appendChild(listItem);
     });
     return songs;
@@ -171,7 +181,9 @@ async function main() {
 
     currentSong.pause();
     console.log("Previous clicked");
-
+    if (currentSong.playBtn) {
+      currentSong.playBtn.src = "play.svg"; // reset previous button to play
+    }
     if (Index > 0) {
       Index--; // Move to the previous song
     } else {
@@ -179,11 +191,19 @@ async function main() {
     }
 
     playMusic(songs, songs[Index], currFolder);
+    const allButtons = document.querySelectorAll(".songlist ul li");
+    const nextBtn = allButtons[Index]?.querySelector(".playnow img");
+    if (nextBtn) {
+      nextBtn.src = "pause.svg";
+      currentSong.playBtn = nextBtn; // update reference
+    }
   });
 
   next.addEventListener("click", () => {
     if (!songs.length) return; // Prevent errors if no songs are loaded
-
+    if (currentSong.playBtn) {
+      currentSong.playBtn.src = "play.svg"; // reset previous button to play
+    }
     currentSong.pause();
     console.log("Next clicked");
 
@@ -194,6 +214,12 @@ async function main() {
     }
 
     playMusic(songs, songs[Index], currFolder);
+    const allButtons = document.querySelectorAll(".songlist ul li");
+    const nextBtn = allButtons[Index]?.querySelector(".playnow img");
+    if (nextBtn) {
+      nextBtn.src = "pause.svg";
+      currentSong.playBtn = nextBtn; // update reference
+    }
   });
 
   // Add an event listener to seekbar
@@ -243,7 +269,9 @@ async function main() {
   });
 
   currentSong.addEventListener("ended", () => {
-    
+    if (currentSong.playBtn) {
+      currentSong.playBtn.src = "play.svg"; // reset previous button to play
+    }
     if (Index + 1 < songs.length) {
       Index ++
       console.log(Index)
@@ -253,6 +281,13 @@ async function main() {
       console.log(Index)
     }
     playMusic(songs, songs[Index], currFolder);
+
+    const allButtons = document.querySelectorAll(".songlist ul li");
+    const nextBtn = allButtons[Index]?.querySelector(".playnow img");
+    if (nextBtn) {
+      nextBtn.src = "pause.svg";
+      currentSong.playBtn = nextBtn; // update reference
+    }
   });
 }
 document.addEventListener("DOMContentLoaded", () => {
